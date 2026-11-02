@@ -13,7 +13,9 @@ Verified locally on November 2, 2026.
 
 ## Separate checks
 
-A live chat command receipt is checked in a dedicated browser session. Connection confirmation alone does not establish receipt of a viewer prediction.
+A live chat command was received on November 2, 2026 at 08:07 UTC from kumarabhinav0905. The round contained 1 Twitch prediction, 0 practice predictions and 0 sample predictions. The host locked it, played the physical recording and revealed Yes. A separate overlay received the same locked round and result. See [the exported notebook](evidence/live-twitch-experiment.json) and [the verification status](evidence/live-twitch-status.json).
+
+The earlier connection-only attempts did not receive a command. Only the successful round above is counted as live chat evidence.
 
 A synchronized overlay in a browser is not a verified Twitch broadcast. The app does not start a stream.
 
