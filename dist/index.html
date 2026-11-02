@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10191d"><meta name="description" content="Turn your Twitch community into a tiny science lab. Lock a prediction, watch a real drop, inspect the evidence.">
+<title>DropLab · Chat predicts. Reality decides.</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="studio.css">
+</head>
+<body>
+<header class="topbar">
+ <a class="brand" href="./" aria-label="DropLab home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 15 4 10V4l12 6 12-6v6l-12 5v12" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="m11 22 5 5 5-5" fill="none" stroke="currentColor" stroke-width="3"/></svg>DropLab<span class="brand-tag">REAL-WORLD PLAY</span></a>
+ <nav aria-label="Main navigation"><a href="#evidence">The evidence</a><a href="guide.html">Streamer's guide</a><button class="button quiet" id="present">Present ↗</button></nav>
+</header>
+<main>
+<section class="intro">
+ <div><p class="eyebrow"><span class="dot"></span> A SMALL EXPERIMENT. A SHARED DISCOVERY.</p><h1>Chat predicts.<br><span>Reality decides.</span></h1><p class="intro-copy">Turn a paper helicopter into a community experiment.<br>Make the call, watch the drop, then check the evidence.</p></div>
+ <div class="intro-aside"><span class="edition">FIELD NOTES / 001</span><div class="tiny-rotor" aria-hidden="true">↘</div><p>Paper. Gravity.<br>A chat full of hypotheses.</p><span class="small-label">3 real recordings · no simulation</span></div>
+</section>
+<div class="workspace-heading"><div><span class="workspace-dot"></span><h2>Helicopter lab</h2><span class="mode-label" id="modeLabel">RECORDED TRIALS</span></div><span id="sessionStatus" class="small-label">Starting studio…</span></div>
+<section class="workspace">
+ <div class="experiment">
+  <div class="experiment-top"><div class="trial-heading"><span class="index-tag" id="trialNumber">01</span><div><h3 id="trialName">The first drop</h3><p id="trialNote">Same paper helicopter. Real room. Real gravity.</p></div></div><span class="phase-pill" id="phasePill">READY TO EXPERIMENT</span></div>
+  <div class="experiment-body">
+   <div class="video-column">
+    <div class="video-stage" id="videoStage">
+     <video id="replayVideo" muted playsinline preload="metadata" aria-label="Recorded paper helicopter drop"></video>
+     <div class="video-topline"><span><i></i> RECORDED TRIAL</span><span>30 FPS</span></div>
+     <div class="video-cover" id="videoCover"><span class="cover-icon">↓</span><strong>Make your prediction first.</strong><p>The drop stays paused until the round is locked.</p></div>
+     <div class="video-bottomline"><span id="videoMarker">Awaiting predictions</span><span id="replayClock">0.00 s</span></div>
+    </div>
+    <div class="video-caption"><span class="square-dot"></span> Real footage <span>·</span> Manual frame review <button id="inspectLink" class="text-link">How we measure ↗</button></div>
+   </div>
+   <div class="call-column">
+    <p class="eyebrow muted">THE QUESTION</p><h3 class="question">Will it stay airborne for at least <span id="questionThreshold">1.00</span> seconds?</h3>
+    <div id="outcome" class="outcome" hidden aria-live="polite"><p class="eyebrow" id="outcomeEyebrow">THE RESULT</p><h3 id="outcomeTitle"></h3><p id="outcomeRange"></p><p id="outcomeExplanation"></p></div>
+    <div id="predictionPane">
+     <p class="prediction-hint" id="predictionHint">Open the round, then choose a side.</p>
+     <div class="choice-grid"><button id="voteYes" class="choice yes" disabled><span>YES</span><strong>It'll make it.</strong><code>!drop yes</code></button><button id="voteNo" class="choice no" disabled><span>NO</span><strong>Gravity wins.</strong><code>!drop no</code></button></div>
+     <p id="yourVote" class="your-vote" aria-live="polite">Try a prediction here, or use the command in Twitch chat.</p>
+    </div>
+    <div class="crowd"><div class="crowd-heading"><span>THE COMMUNITY CALL</span><strong id="totalVotes">0 predictions</strong></div><div class="vote-track" aria-label="Prediction distribution"><div id="yesBar"></div><div id="noBar"></div></div><div class="vote-labels"><span><i class="yes-dot"></i> Yes <b id="yesCount">0</b></span><span>No <b id="noCount">0</b> <i class="no-dot"></i></span></div><p id="voteSources" class="small-label">No predictions yet</p></div>
+    <div class="seal" id="seal" hidden><span>⌁</span><div><strong>Predictions sealed before the drop</strong><code id="sealHash"></code></div></div>
+   </div>
+  </div>
+  <div class="experiment-bottom"><div class="phase-steps" aria-label="Round progress"><span data-phase="predicting">01 Predict</span><i></i><span data-phase="replaying">02 Drop</span><i></i><span data-phase="revealed">03 Discover</span></div><span class="small-label" id="roundFootnote">One prediction per viewer. Change it until the lock.</span></div>
+ </div>
+ <aside class="host-panel" id="hostPanel">
+  <div class="host-title"><h3>Your lab bench</h3><span>HOST CONTROLS</span></div>
+  <label class="field-label" for="trialSelect">Choose a recording</label>
+  <select id="trialSelect"><option value="trial-01">01 · The first drop</option><option value="trial-02">02 · A closer call</option><option value="trial-03">03 · The next drop</option></select>
+  <div class="threshold-field"><label class="field-label" for="threshold">Prediction line</label><div><input id="threshold" type="number" min="0.3" max="5" step="0.05" value="1.00"><span>seconds</span></div></div>
+  <p class="help-copy">The question stays fixed once predictions open.</p>
+  <button id="mainAction" class="button primary full" disabled><span>Open predictions</span><b>↗</b></button>
+  <button id="replayAgain" class="button secondary full" hidden>Watch the drop again</button>
+  <button id="cancelRound" class="text-link cancel" hidden>Cancel this round</button>
+  <p id="hostHint" class="host-hint" aria-live="polite">Loading the lab…</p>
+  <div class="panel-rule"></div>
+  <div class="connection-heading"><h4>Twitch chat</h4><span class="connection-badge" id="connectionBadge">NOT CONNECTED</span></div>
+  <form id="connectForm"><label class="sr-only" for="channel">Twitch channel</label><div class="channel-field"><span>#</span><input id="channel" value="kumarabhinav0905" maxlength="25" autocomplete="off" spellcheck="false" aria-label="Twitch channel"><button type="submit" id="connectChat" class="button secondary">Connect</button></div></form>
+  <p id="chatStatus" class="help-copy" aria-live="polite">Read-only. No password needed. DropLab never posts to chat.</p>
+  <p id="chatActivity" class="small-label" hidden></p>
+  <details class="practice-details"><summary>Try it without Twitch</summary><p>Your on-page choice is labelled as a practice prediction. You can also add three clearly marked sample voters.</p><button id="sampleAudience" class="button secondary full" disabled>Add sample voters</button><p id="sampleStatus" class="help-copy"></p></details>
+  <button id="overlayButton" class="button secondary full overlay-button">Open stream overlay ↗</button>
+  <p class="help-copy overlay-help">A clean broadcast view. No host controls.</p>
+ </aside>
+</section>
+<section class="discovery" id="discovery" hidden>
+ <div><p class="eyebrow">THE NEXT QUESTION IS YOURS</p><h2>Change one thing.<br>Find out together.</h2><p>Chat can choose the next experiment. These are proposals for a future physical test.</p></div>
+ <div class="next-options" id="nextOptions"><button data-test="blades"><span>01</span><strong>Longer blades</strong><code>!test blades</code><b id="next-blades">0 votes</b></button><button data-test="weight"><span>02</span><strong>One paper clip</strong><code>!test weight</code><b id="next-weight">0 votes</b></button><button data-test="repeat"><span>03</span><strong>Repeat this design</strong><code>!test repeat</code><b id="next-repeat">0 votes</b></button></div>
+</section>
+<section class="evidence-section" id="evidence">
+ <div class="section-heading"><div><p class="eyebrow">NOT JUST A NUMBER ON SCREEN</p><h2>A result you can inspect.</h2></div><button id="export" class="button secondary" disabled>Export experiment ↓</button></div>
+ <div class="evidence-intro"><p>The camera moved, so automatic tracking wasn't reliable. We reviewed the release and landing frames instead. The result is a <strong>time range</strong>, with room for what the footage can't settle.</p><span class="method-tag">MANUAL REVIEW<br><small>Not automatic timing</small></span></div>
+ <div id="evidenceWaiting" class="evidence-waiting"><span>⌁</span><p>The frame notes appear after the reveal.<br><strong>Predict first. Inspect everything afterward.</strong></p></div>
+ <div id="evidenceDetails" hidden>
+  <div class="measurement-grid"><article><span>01 / RELEASE WINDOW</span><strong id="releaseWindow"></strong><p>Last held / first clearly released frames</p><button class="text-link" id="jumpRelease">Inspect release ↗</button></article><article><span>02 / LANDING WINDOW</span><strong id="landingWindow"></strong><p>Last airborne / first contact frames</p><button class="text-link" id="jumpLanding">Inspect landing ↗</button></article><article class="range-card"><span>03 / POSSIBLE FLIGHT TIME</span><strong id="flightWindow"></strong><p>Landing window minus release window</p><span class="small-label">The range includes visual ambiguity.</span></article></div>
+  <div class="inspection-controls"><button id="frameBack" class="button quiet">−1 frame</button><button id="frameForward" class="button quiet">+1 frame</button><label for="scrub">Inspect replay</label><input id="scrub" type="range" min="0" max="3" step="0.033333" value="0"><output id="inspectTime">0.00 s</output><button id="slowReplay" class="button quiet">Replay at 0.25×</button></div>
+  <div class="integrity-note"><span>↳</span><p id="integrityNote"></p></div>
+ </div>
+ <div class="history" id="historySection" hidden><h3>Session notebook</h3><div class="table-wrap"><table><thead><tr><th>Trial</th><th>Prediction line</th><th>Reviewed range</th><th>Call</th><th>Predictions</th></tr></thead><tbody id="historyBody"></tbody></table></div></div>
+</section>
+<section class="how-it-works"><article><span>01</span><h3>Commit to a prediction.</h3><p>Viewers type a simple command. The host locks every choice before revealing the drop.</p></article><article><span>02</span><h3>Let the real world answer.</h3><p>Watch a real paper helicopter fall. The three recordings are replayed, never passed off as live footage.</p></article><article><span>03</span><h3>Leave room for uncertainty.</h3><p>If the timing range straddles the prediction line, the round is too close to call. No invented winner.</p></article></section>
+<footer><a class="brand" href="./">↘ DropLab</a><p>Built with Codex for curious Twitch communities.</p><div><a href="guide.html">Setup & testing</a><a href="camera.html">Camera prototype</a></div></footer>
+</main>
+<div class="toast" id="toast" role="status" hidden></div>
+<button id="exitPresentation" class="button quiet present-exit">Back to studio ↙</button>
+<dialog id="overlayDialog"><form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form><p class="eyebrow">READY FOR YOUR STREAM</p><h2>Give the experiment<br>the whole screen.</h2><p id="overlayInstructions"></p><label class="field-label" for="overlayURL">Overlay URL</label><input id="overlayURL" readonly><div class="dialog-actions"><button id="copyOverlay" class="button secondary">Copy URL</button><a id="openOverlay" class="button primary" target="_blank" rel="noopener">Open overlay ↗</a></div><p class="help-copy">For OBS: add a Browser source at 1280 × 720. Keep the studio open. The overlay is read-only.</p></dialog>
+<script type="module" src="studio.js"></script>
+</body></html>
