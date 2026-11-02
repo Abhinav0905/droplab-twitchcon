@@ -3,7 +3,7 @@ import AVFoundation
 import AppKit
 
 struct Scene: Decodable { let audio: String; let start: Double; let audioDuration: Double }
-struct Timeline: Decodable { let duration: Double; let scenes: [Scene]; let proofStart: Double?; let proofDuration: Double? }
+struct Timeline: Decodable { let duration: Double; let scenes: [Scene]; let proofStart: Double?; let proofDuration: Double?; let initialStillFrames: Int? }
 
 @main struct AssembleDemo {
   static func main() async throws {
@@ -40,7 +40,7 @@ struct Timeline: Decodable { let duration: Double; let scenes: [Scene]; let proo
         let inProof = index >= proofStart && index < proofStart + proofFrames
         let sourceIndex = index >= proofStart + proofFrames ? index - proofFrames : index
         let name = inProof ? (index - proofStart < proofFrames / 2 ? "proof-1.png" : "proof-2.png") :
-          sourceIndex < 263 ? "intro.png" : String(format: "frame-%05d.png", sourceIndex + 1)
+          sourceIndex < (timeline.initialStillFrames ?? 263) ? "intro.png" : String(format: "frame-%05d.png", sourceIndex + 1)
         let url = URL(fileURLWithPath: args[1]).appendingPathComponent(name)
         guard let image = NSImage(contentsOf: url)?.cgImage(forProposedRect: nil, context: nil, hints: nil) else { fatalError("Missing frame \(name)") }
         var pixel: CVPixelBuffer?
