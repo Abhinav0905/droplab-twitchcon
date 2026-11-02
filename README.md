@@ -11,6 +11,7 @@ Three physical recordings are included. No camera, API key or Twitch account is 
 - Hosted preview: https://droplab-reality-check.abhinav-0905.chatgpt.site.
 - Source repository: https://github.com/Abhinav0905/droplab-twitchcon.
 - [Verified real Twitch round](docs/evidence/live-twitch-experiment.json): one Twitch prediction, no practice or sample votes, followed through lock, recorded replay and synchronized result.
+- [Demo video](https://www.youtube.com/watch?v=2pwhLy2HyIU), 2 minutes 38 seconds.
 - [Validation record](docs/validation.md).
 
 ## Run

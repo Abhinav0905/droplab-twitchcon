@@ -15,7 +15,7 @@ Verified locally on November 2, 2026.
 
 - The website and GitHub repository were made public with creator approval on November 2, 2026. Both returned HTTP 200 without account credentials.
 - A fresh browser opened the public demo, completed a practice round and reached RESULT REVEALED with no page errors. That hosted check contained 0 Twitch, 1 practice and 0 sample predictions.
-- The narrated demo is 158.32 seconds at 1440 × 810, 25 fps. It includes captures from the separately verified real Twitch round. Video frames and the decoded audio track were checked. Public YouTube upload is still pending.
+- The narrated demo is 158.32 seconds at 1440 × 810, 25 fps. It includes captures from the separately verified real Twitch round. Video frames and the decoded audio track were checked. The public [YouTube video](https://www.youtube.com/watch?v=2pwhLy2HyIU) was verified without signing in: playback status OK, private false, unlisted false, displayed duration 2:38.
 
 ## Separate checks
 
