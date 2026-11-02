@@ -8,6 +8,8 @@ Three physical recordings are included. No camera, API key or Twitch account is 
 
 ## Project links
 
+- [Devpost entry](https://devpost.com/software/droplab-klnjsw), submitted to Codex x TwitchCon.
+
 - Hosted preview: https://droplab-reality-check.abhinav-0905.chatgpt.site.
 - Source repository: https://github.com/Abhinav0905/droplab-twitchcon.
 - [Verified real Twitch round](docs/evidence/live-twitch-experiment.json): one Twitch prediction, no practice or sample votes, followed through lock, recorded replay and synchronized result.
